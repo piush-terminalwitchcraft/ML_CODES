@@ -8,444 +8,783 @@
 <h1>This is a Heading</h1>
 <p>This is a paragraph.</p>
 
- Preprocessing 
+ install.packages("ggplot2")
+library(ggplot2)
+
+------------Write a R program to create a Data Frame which contain details of 5 employees and display summary of the data using R.----------------
+
+# Create a data frame with employee details
+employee_data <- data.frame(
+  Employee_ID = c(1, 2, 3, 4, 5),
+  Name = c("John", "Alice", "Bob", "Eva", "Michael"),
+  Age = c(30, 28, 35, 32, 29),
+  Department = c("IT", "HR", "Finance", "Marketing", "IT"),
+  Salary = c(50000, 55000, 60000, 48000, 52000)
+)
+
+# Display the created data frame
+print("Employee Data:")
+print(employee_data)
+
+# Summary of the data
+summary(employee_data)
+
+----------- OR -----------
+
+# Create empty vectors to store user input
+employee_ids <- c()
+names <- c()
+ages <- c()
+departments <- c()
+salaries <- c()
+
+# Loop to take input for 5 employees
+for (i in 1:5) {
+  cat("Enter details for Employee", i, ":\n")
+  employee_ids[i] <- as.numeric(readline(prompt="Employee ID: "))
+  names[i] <- readline(prompt="Name: ")
+  ages[i] <- as.numeric(readline(prompt="Age: "))
+  departments[i] <- readline(prompt="Department: ")
+  salaries[i] <- as.numeric(readline(prompt="Salary: "))
+}
+
+# Create data frame using user input
+employee_data <- data.frame(
+  Employee_ID = employee_ids,
+  Name = names,
+  Age = ages,
+  Department = departments,
+  Salary = salaries
+)
+
+# Display the created data frame
+print("Employee Data:")
+print(employee_data)
+
+# Summary of the data
+summary(employee_data)
+
+---------- Write the script in R to sort the values contained in the following vector in ascending order and descending order: (23, 45, 10, 34, 89, 20, 67, 99). Demonstrate the output using graph.--------
+
+# Given vector
+vector <- c(23, 45, 10, 34, 89, 20, 67, 99)
+
+# Sort the vector in ascending order
+sorted_asc <- sort(vector)
+
+# Sort the vector in descending order
+sorted_desc <- sort(vector, decreasing = TRUE)
+
+# Output the sorted vectors
+cat("Sorted vector in ascending order:", sorted_asc, "\n")
+cat("Sorted vector in descending order:", sorted_desc, "\n")
+
+# Plotting the sorted vectors using bar graphs
+par(mfrow = c(1, 2))  # Set up a 1x2 grid for plots
+
+# Bar plot for ascending order
+barplot(sorted_asc, names.arg = sorted_asc, main = "Sorted Vector (Ascending Order)", xlab = "Values", ylab = "Sorted Values", col = "skyblue")
+
+# Bar plot for descending order
+barplot(sorted_desc, names.arg = sorted_desc, main = "Sorted Vector (Descending Order)", xlab = "Values", ylab = "Sorted Values", col = "salmon")
+
+--------------- The following table shows the number of units of different products sold on different days: -> Create five sample numeric vectors from this data visualize data using R. --------------------
+
+# Create five empty vectors
+
+bread <- numeric(0)
+milk <- numeric(0)
+cola_cans <- numeric(0)
+chocolate_bars <- numeric(0)
+detergent <- numeric(0)
+
+# Fill the vectors with the data from the table
+bread <- c(12, 3, 5, 11, 9)
+milk <- c(21, 27, 18, 20, 15)
+cola_cans <- c(10, 1, 33, 6, 12)
+chocolate_bars <- c(6, 7, 4, 13, 12)
+detergent <- c(5, 8, 12, 20, 23)
+
+# To visualize the data, we can use the following R code:
+
+# Create a bar plot for each product
+barplot(bread, main = "Bread Sales")
+barplot(milk, main = "Milk Sales")
+barplot(cola_cans, main = "Cola Can Sales")
+barplot(chocolate_bars, main = "Chocolate Bar Sales")
+barplot(detergent, main = "Detergent Sales")
+
+---------------------------------------Consider the following data frame given below: (i) Create a subset of subject less than 4 by using subset () funcon and demonstrate the output.
+(ii) Create a subject where the subject column is less than 3 and the class equals to 2 by using [] brackets and demonstrate the output using R ------------------------------------------------------------
+
+# Create a data frame
+df <- data.frame(Subject = c(1, 2, 3, 4, 5, 6),
+                   Class = c(1, 2, 3, 4, 5, 6),
+                   Marks = c(56, 75, 48, 69, 84, 53))
+
+# Subset the data frame to include only subjects less than 4
+subset1 <- subset(df, Subject < 4)
+
+# Print the subset
+print(subset1)
+
+# Subset the data frame to include only subjects less than 3 and class equals to 2
+subset <- df[(df$Subject < 3) & (df$Class == 2), ]
+# Print the subset
+print(subset)
+
+---------------------The data analyst of Argon technology Mr. John needs to enter the salaries of 10 employees in R. The salaries of the employees are given in the following table:
+i) Which R command will Mr. John use to enter these values demonstrate the output. ii) Now Mr. John wants to add the salaries of 5 new employees in the existing table, 
+which command he will use to join datasets with new values in R. Demonstrate the output. (iii) Visialize the data using chart . ----------------------------------------------
+
+# Create a data frame from the table in the image
+employee_salaries <- data.frame(
+  Name = c("Vivek", "Karan", "James", "Soham", "Renu", "Farah", "Hetal", "Mary", "Ganesh", "Krish"),
+  Salary = c(21000, 55000, 67000, 50000, 54000, 40000, 30000, 70000, 20000, 15000)
+)
+
+# Add the salaries of 5 new employees to the existing table
+new_employee_salaries <- data.frame(
+  Name = c("Neha", "Rahul", "Priya", "Ankit", "Rohit"),
+  Salary = c(25000, 35000, 45000, 50000, 60000)
+)
+
+# Join the two data frames
+employee_salaries <- rbind(employee_salaries, new_employee_salaries)
+
+# Visualize the data using a bar plot
+ggplot(employee_salaries, aes(x = Name, y = Salary)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Employee Name", y = "Salary")
+
+
+-------------------------------Bloom Filter------------------------------------
+
+class BloomFilter:
+    def __init__(self, size, hash_functions):
+        self.size = size
+        self.hash_functions = hash_functions
+        self.bit_array = [0] * size
+
+    def _hash(self, item, seed):
+        hash_val = 0
+        for char in str(item):
+            hash_val = hash_val * seed + ord(char)
+        return hash_val % self.size
+
+    def add(self, item):
+        for seed in self.hash_functions:
+            index = self._hash(item, seed)
+            self.bit_array[index] = 1
+
+    def contains(self, item):
+        for seed in self.hash_functions:
+            index = self._hash(item, seed)
+            if self.bit_array[index] == 0:
+                return False
+        return True
+
+# Example usage:
+if __name__ == "__main__":
+    size = 20  # Size of the Bloom filter (number of bits)
+    hash_functions = [3, 5, 7]  # Number of hash functions
+
+    bloom_filter = BloomFilter(size, hash_functions)
+
+    # Add items to the Bloom filter
+    items_to_add = input("Enter items to add to the Bloom filter (comma separated): ").split(',')
+    for item in items_to_add:
+        bloom_filter.add(item.strip())
+
+    # Check if items are in the Bloom filter
+    items_to_check = input("Enter items to check in the Bloom filter (comma separated): ").split(',')
+    for item in items_to_check:
+        if bloom_filter.contains(item.strip()):
+            print(f"'{item}' is possibly in the set.")
+        else:
+            print(f"'{item}' is not in the set.")
+
+
+------------------------------- FM Algorithm ----------------------------------
+
+import random
+import math
+
+def trailing_zeros(x):
+    """ Counting number of trailing zeros
+    in the binary representation of x."""
+    if x == 0:
+        return 1
+    count = 0
+    while x & 1 == 0:
+        count += 1
+        x >>= 1
+    return count
+
+def flajolet_martin(dataset, k):
+    """Number of distinct elements using
+    the Flajolet-Martin Algorithm."""
+    max_zeros = 0
+    for i in range(k):
+        hash_vals = [trailing_zeros(random.choice(dataset))
+                     for _ in range(len(dataset))]
+        max_zeros = max(max_zeros, max(hash_vals))
+
+    return 2 ** max_zeros
+
+# Take dataset input from user
+dataset = list(map(int, input("Enter the dataset (comma-separated): ").split(',')))
+k = int(input("Enter the number of hash functions: "))
+dist_num = flajolet_martin(dataset, k)
+print("Estimated number of distinct elements:", dist_num)
+
+
+----------------------------------------------Analyse and visualize churn modelling data using R----------------------------------------- --> ignore ->>  colnames(data)
+ 
+# Load required packages
+# install.packages("ggplot2")
+library(ggplot2)
+# install.packages("dplyr")
+library(dplyr)
+
+# Step 1: Load the churn modeling dataset
+churn_data <- read.csv("churn_modelling.csv", header = TRUE)
+
+# Step 2: Explore the dataset
+head(churn_data)
+summary(churn_data)
+str(churn_data)
+
+# Step 3: Visualize the data
+
+# Example visualization: Distribution of Ages
+ggplot(churn_data, aes(x = Age, fill = factor(Exited))) +
+  geom_histogram(binwidth = 5, position = "identity", alpha = 0.7) +
+  labs(title = "Distribution of Ages by Churn Status", x = "Age", y = "Count", fill = "Churn Status") +
+  theme_minimal()
+
+# Example visualization: Box plot of Credit Score by Geography and Churn Status
+ggplot(churn_data, aes(x = Geography, y = CreditScore, fill = factor(Exited))) +
+  geom_boxplot() +
+  labs(title = "Credit Score by Geography and Churn Status", x = "Geography", y = "Credit Score", fill = "Churn Status") +
+  theme_minimal()
+
+# Step 4: Perform additional analysis and visualizations based on your research questions
+
+# For example, you can analyze the relationship between Age and Churn Status using a scatter plot
+ggplot(churn_data, aes(x = Age, y = Exited, color = factor(Exited))) +
+  geom_point() +
+  labs(title = "Churn Status by Age", x = "Age", y = "Churn Status", color = "Churn Status") +
+  theme_minimal()
+
+# Or you can analyze the distribution of Balance by Churn Status using a violin plot
+ggplot(churn_data, aes(x = factor(Exited), y = Balance, fill = factor(Exited))) +
+  geom_violin() +
+  labs(title = "Distribution of Balance by Churn Status", x = "Churn Status", y = "Balance", fill = "Churn Status") +
+  theme_minimal()
+
+------------------------------------------------Analyse and visualize IRIS data using R---------------------------------------------
+
+# Load required packages
+install.packages("ggplot2")
+library(ggplot2)
+
+# Step 1: Load the Iris dataset
+data(iris)
+
+# Step 2: Explore the dataset
+head(iris)
+summary(iris)
+str(iris)
+
+# Step 3: Visualize the data
+
+# Scatter plot: Sepal Length vs Sepal Width
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point() +
+  labs(title = "Sepal Length vs Sepal Width", x = "Sepal Length (cm)", y = "Sepal Width (cm)")
+
+# Scatter plot: Petal Length vs Petal Width
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) +
+  geom_point() +
+  labs(title = "Petal Length vs Petal Width", x = "Petal Length (cm)", y = "Petal Width (cm)")
+
+# Box plot: Sepal Length by Species
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  labs(title = "Sepal Length by Species", x = "Species", y = "Sepal Length (cm)")
+
+# Box plot: Petal Length by Species
+ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
+  geom_boxplot() +
+  labs(title = "Petal Length by Species",
+       
+----------------------------Analyse and visualize supermarket data using R-----------------------------------------------------
+
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Read the data from the CSV file
+data <- read.csv("supermarket_sales - Sheet1.csv" , encoding = 'UTF-8')
+
+# Clean column names (remove leading/trailing spaces)
+colnames(data) <- trimws(colnames(data))
+
+# Summary statistics using dplyr
+summary_data <- data %>%
+  summarise(
+    Mean_Rating = mean(Rating),
+    Total_Sales = sum(Total),
+    Average_Price = mean(.[[2]]), # Assuming "Unit Price" is the second column
+    Max_Quantity = max(Quantity)
+  )
+
+
+# Print summary statistics
+print(summary_data)
+
+# Bar plot for Gender distribution using ggplot2
+gender_plot <- data %>%
+  ggplot(aes(x = Gender)) +
+  geom_bar() +
+  ggtitle("Gender Distribution")
+
+# Histogram for Rating distribution using ggplot2
+rating_plot <- data %>%
+  ggplot(aes(x = Rating)) +
+  geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
+  ggtitle("Rating Distribution")
+
+# Box plot for Gross Income by Branch using ggplot2
+branch_income_plot <- data %>%
+  ggplot(aes(x = Branch, y = `gross.income`)) +
+  geom_boxplot(fill = "lightgreen", color = "black") +
+  ggtitle("Gross Income by Branch")
+
+# Print the box plot
+print(branch_income_plot)
+
+# Scatter plot for Unit Price vs. Quantity using ggplot2
+price_quantity_plot <- data %>%
+  ggplot(aes(x = `Unit.price`, y = Quantity)) +
+  geom_point(color = "blue") +
+  ggtitle("Unit Price vs. Quantity")
+
+# Convert Date column to Date format
+data$Date <- as.Date(data$Date, format = "%m/%d/%Y")
+
+# Time series plot for sales over time using ggplot2
+sales_over_time_plot <- data %>%
+  ggplot(aes(x = Date, y = Total)) +
+  geom_line(color = "red") +
+  ggtitle("Sales over Time") +
+  labs(x = "Date", y = "Total Sales")
+
+# Print summary statistics
+print(summary_data)
+
+# Print and save plots (optional)
+print(gender_plot)
+print(rating_plot)
+print(branch_income_plot)
+print(price_quantity_plot)
+print(sales_over_time_plot)
+
+-------------------------  Analyse and visualize Loan data using R --------------------------------------
+
+# Load necessary libraries
+# install.packages(c("ggplot2", "dplyr")) # Install ggplot2 and dplyr if you haven't already
+library(ggplot2)
+library(dplyr)
+
+# Read the loan data from the CSV file
+loan_data <- read.csv("loan_data_set.csv")
+
+# Summary statistics using dplyr
+summary_data <- loan_data %>%
+  summarise(
+    Mean_ApplicantIncome = mean(ApplicantIncome),
+    Mean_CoapplicantIncome = mean(CoapplicantIncome),
+    Mean_LoanAmount = mean(LoanAmount),
+    Credit_History_Yes = sum(Credit_History == 1),
+    Credit_History_No = sum(Credit_History == 0),
+    Loan_Approval_Count = sum(Loan_Status == "Y")
+  )
+
+# Print summary statistics
+print(summary_data)
+
+# Visualizations
+# Bar plot for Loan Approval Status
+loan_approval_plot <- loan_data %>%
+  ggplot(aes(x = Loan_Status)) +
+  geom_bar(fill = "skyblue") +
+  ggtitle("Loan Approval Status")
+
+# Box plot for Loan Amount by Education Level
+loan_amount_education_plot <- loan_data %>%
+  ggplot(aes(x = Education, y = LoanAmount)) +
+  geom_boxplot(fill = "lightgreen", color = "black") +
+  ggtitle("Loan Amount by Education Level")
+
+# Histogram for Applicant Income
+applicant_income_plot <- loan_data %>%
+  ggplot(aes(x = ApplicantIncome)) +
+  geom_histogram(binwidth = 500, fill = "orange", color = "black") +
+  ggtitle("Applicant Income Distribution")
+
+# Print plots
+print(loan_approval_plot)
+print(loan_amount_education_plot)
+print(applicant_income_plot)
+ 
+ ------------------------- graphs plotting -------------------------
+ 
+ Scatterplot:
+# Assuming data is in a data frame called "data"
+plot(data$variable1, data$variable2, main="Scatterplot", xlab="Variable 1", ylab="Variable 2")
+
+Bubble Chart:
+# Assuming data is in a data frame called "data"
+symbols(data$variable1, data$variable2, circles=data$variable3, inches=0.25, main="Bubble Chart", xlab="Variable 1", ylab="Variable 2")
+
+Bar Chart:
+# Assuming data is in a data frame called "data"
+barplot(data$counts, names.arg=data$categories, main="Bar Chart", xlab="Categories", ylab="Counts")
+
+Dot Plots:
+# Assuming data is a numeric vector
+dotchart(data, main="Dot Plot", xlab="Values")
+
+Histogram:
+# Assuming data is a numeric vector
+hist(data, main="Histogram", xlab="Values", ylab="Frequency")
+
+Box Plot:
+# Assuming data is in a data frame called "data"
+boxplot(data$variable, main="Box Plot", ylab="Values")
+
+Pie Chart:
+# Assuming data is in a data frame called "data"
+pie(data$counts, labels=data$categories, main="Pie Chart")
+
+
+ ________________________Commands____________________________________________
+
+HDFS Commands
+Open a terminal window to the current working directory.
+# /home/training
+# 1. Print the Hadoop version
+		hadoop version
+# 2. List the contents of the root directory in HDFS
+#
+		hadoop fs -ls /
+# 3. Report the amount of space used and
+# available on currently mounted filesystem
+#
+		hadoop fs -df hdfs:/
+# 4. Count the number of directories,files and bytes under
+# the paths that match the specified file pattern
+#
+		hadoop fs -count hdfs:/
+# 5. Run a DFS filesystem checking utility
+#
+		hadoop fsck - /
+# 6. Run a cluster balancing utility
+#
+		hadoop balancer
+# 7. Create a new directory named "hadoop" below the
+# /user/training directory in HDFS. Since you're
+# currently logged in with the "training" user ID,
+# /user/training is your home directory in HDFS.
+#
+hadoop fs -mkdir /user/training/hadoop
+# 8. Add a sample text file from the local directory
+# named "data" to the new directory you created in HDFS
+# during the previous step.
+#
+hadoop fs -put data/sample.txt /user/training/hadoop
+
+# 9. List the contents of this new directory in HDFS.
+#
+hadoop fs -ls /user/training/hadoop
+# 10. Add the entire local directory called "retail" to the
+# /user/training directory in HDFS.
+#
+hadoop fs -put data/retail /user/training/hadoop
+# 11. Since /user/training is your home directory in HDFS,
+# any command that does not have an absolute path is
+# interpreted as relative to that directory. The next
+# command will therefore list your home directory, and
+# should show the items you've just added there.
+#
+hadoop fs -ls
+# 12. See how much space this directory occupies in HDFS.
+#
+hadoop fs -du -s -h hadoop/retail
+# 13. Delete a file 'customers' from the "retail" directory.
+#
+hadoop fs -rm hadoop/retail/customers
+# 14. Ensure this file is no longer in HDFS.
+#
+hadoop fs -ls hadoop/retail/customers
+# 15. Delete all files from the "retail" directory using a wildcard.
+#
+hadoop fs -rm hadoop/retail/*
+# 16. To empty the trash
+#
+hadoop fs -expunge
+# 17. Finally, remove the entire retail directory and all
+# of its contents in HDFS.
+#
+hadoop fs -rm -r hadoop/retail
+# 18. List the hadoop directory again
+
+#
+hadoop fs -ls hadoop
+# 19. Add the purchases.txt file from the local directory
+# named "/home/training/" to the hadoop directory you created in HDFS
+#
+hadoop fs -copyFromLocal /home/training/purchases.txt hadoop/
+# 20. To view the contents of your text file purchases.txt
+# which is present in your hadoop directory.
+#
+hadoop fs -cat hadoop/purchases.txt
+# 21. Add the purchases.txt file from "hadoop" directory which is present in HDFS directory
+# to the directory "data" which is present in your local directory
+#
+hadoop fs -copyToLocal hadoop/purchases.txt /home/training/data
+# 22. cp is used to copy files between directories present in HDFS
+#
+hadoop fs -cp /user/training/*.txt /user/training/hadoop
+# 23. '-get' command can be used alternaively to '-copyToLocal' command
+#
+hadoop fs -get hadoop/sample.txt /home/training/
+# 24. Display last kilobyte of the file "purchases.txt" to stdout.
+#
+hadoop fs -tail hadoop/purchases.txt
+# 25. Default file permissions are 666 in HDFS
+# Use '-chmod' command to change permissions of a file
+#
+hadoop fs -ls hadoop/purchases.txt
+sudo -u hdfs hadoop fs -chmod 600 hadoop/purchases.txt
+# 26. Default names of owner and group are training,training
+# Use '-chown' to change owner name and group name simultaneously
+#
+hadoop fs -ls hadoop/purchases.txt
+sudo -u hdfs hadoop fs -chown root:root hadoop/purchases.txt
+# 27. Default name of group is training
+# Use '-chgrp' command to change group name
+
+#
+hadoop fs -ls hadoop/purchases.txt
+sudo -u hdfs hadoop fs -chgrp training hadoop/purchases.txt
+# 28. Move a directory from one location to other
+#
+hadoop fs -mv hadoop apache_hadoop
+# 29. Default replication factor to a file is 3.
+# Use '-setrep' command to change replication factor of a file
+#
+hadoop fs -setrep -w 2 apache_hadoop/sample.txt
+# 30. Copy a director  noy from one node in the cluster to another
+# Use '-distcp' command to copy,
+# -overwrite option to overwrite in an existing files
+# -update command to synchronize both directories
+#
+hadoop fs -distcp hdfs://namenodeA/apache_hadoop hdfs://namenodeB/hadoop
+# 31. Command to make the name node leave safe mode
+#
+hadoop fs -expunge
+sudo -u hdfs hdfs dfsadmin -safemode leave
+# 32. List all the hadoop file system shell commands
+#
+hadoop fs
+# 33. Last but not least, always ask for help!
+#
+hadoop fs -help
+
+--------------------------Use of Sqoop tool to transfer data between Hadoop and relational database servers.------------------------
+
+mysql -u root -p // my sql will start password: cloudera
+
+create database bank;
+
+show databases;
+
+use bank;
+
+create table register(
+	acc verchar(20),
+  name varchar(20),
+  number varchar(20),
+  email varchar(20),
+  age varchar(2));
+  
+describe register;
+
+insert into register values ("1" , "Shivam", "11", "shiv@gmail.com", "21");
+insert into register values ("2" , "Idris", "12", "idris@gmail.com", "20");
+insert into register values ("3" , "Krish", "13", "Krish@gmail.com", "42");
+insert into register values ("4" , "Priyansh", "11", "pri@gmail.com", "32");
+insert into register values ("5" , "Naik", "15", "naik@gmail.com", "28");
+
+select * from register;
+
+exit // out from mysql
+
+//importing data into file
+
+sqoop import --connect jdbc:mysql://localhost:3306/bank--username root --password cloudera --table register --target-dir=/home/cloudera/myData -m 1
+
+sqoop import --connect jdbc:mysql://localhost:3306/bank--username root --password cloudera --table register --target-dir=/home/cloudera/myData -m 1
+
+hadoop fs -ls /home/cloudera/myData
+
+// creating copy table in mysql
+
+mysql -u root -p
+
+use bank;
+
+create table registercopy( acc varchar(20), name varchar(20), number varchar(20), email varchar(30), age varchar(2));
+
+// exporting data into my sql
+
+sqoop export --connect jdbc:mysql://localhost/bank--username root --password cloudera --table registercopy --export-dir /home/cloudera/myData
+
+----------------------hbase----------------
+
+hbase shell
+
+create 'account','name','password','email','type'
+
+list
+
+is_disabled 'account'
+
+describe 'account'
+
+alter 'account', NAME => 'name', VERSION => 5
+
+exists 'account'
+
+drop 'account'   // hoga nahi error show karega
+
+create 'register','personal data','account data'
+
+put 'register','1','personal data:name','Idirs'
+put 'register','1','personal data:age','21'
+put 'register','1','personal data:email','idirs@gmail.com'
+put 'register','1','personal data:Type','Savings'
+
+put 'register','2','personal data:name','Shivam'
+put 'register','2','personal data:age','21'
+put 'register','2','personal data:email','striv@gmail.com'
+put 'register','2','personal data:Type','Savings'
+
+scan 'register'
+
+get 'register' '1'
+
+get 'register' '2'
+
+delete 'register','1','personal data:name','1693745213295'
+hbase> delete 'ns1:t1', 'r1', 'c1',ts1 // if needed then write these lines
+hbase> delete 't1','r1','c1',ts1
+hbase> delete 't1','r1','c1',ts1
+hbase> t.delete 'r1','c1',ts1
+hbase> t.delete 'r1','c1',ts1
+
+delete 'register','1','personal data:name','1693745213295'
+
+count 'register'
+
+Truncate 'register'
+
+Truncate 'account'
+
+----------------------PIG-------------------------
+
+//create txt file as 
+hive-emp.txt
+
+1,ABC,1000
+2,DEF,2000
+3,GHI,3000
+4,JKL,4000
+5,MNO,5000
+
+//pig-student.txt
+
+1,ABC,21,89
+2,DEF,20,93
+3,GHI,21,80
+4,JKL,22,92
+5,MNO,20,87
+6,PQR,21,79
+
+grunt
+
+employeeData = LOAD '/home/cloudera/hive-emp.txt' USING PigStorage(',') AS (id:int,name:chararray,salary:int);
+
+DESCRIBE employeeData
+
+DUMP employeeData;
+
+filterData = FILTER employeeData BY salary > 2000;
+
+DUMP filterData;
+
+salaryDetails = FOREACH employeeData GENERATE id,salary;
+
+DUMP salaryDetails;
+
+studentData = LOAD '/home/cloudera/pig-studentp.txt' USING PigStorage(',') AS (id:int,name:chararray,age:int,percentage:int);
+
+DUMP studentData;
+
+groupedStudentData = GROUP studentData BY age;
+
+DUMP groupedStudentData;
+
+innerJoin = JOIN  employeeData BY id, studentData BY id;
+DUMP innerJoin
+
+--------------------------HIVE DATABASE AND DESCRIPTIVE ANALYSTICS(BASIC STSTISTICS)------------------------------
+
+// file hive-emp.txt
+1,ABC,1000
+2,DEF,2000
+3,GHI,3000
+4,JKL,4000
+5,MNO,5000
+
+create database employee;
+
+show databases;
+
+use employee;
+
+create table emp(id INT, name STRING, salary INT)row format delimited fields terminated by ',' stored as textfile;
+
+describe emp;
+
+load data local inpath '/home/cloudera/hive-emp.txt' into table emp;
+
+select * emp;
+
+alter table emp rename to emp_data;
+
+select * from emp_data where id=2;
+
+select count(*) from emp_data;
+
+select AVG(salary) as avg_salary from emp_data;
+
+select MAX(salary) as max_salary from emp_data;
 
- import pandas as pd
-from sklearn.preprocessing import StandardScaler, MinMaxScaler, LabelEncoder
 
-# Load data from CSV
-data = pd.read_csv('preprocessing.csv')
-
-# Display the original data
-print("Original Data:")
-print(data)
-print()
-
-# 1. Imputation using mean for missing values
-data_imputed = data.fillna(data.mean())
-
-print("Imputed Data:")
-print(data_imputed)
-print()
-
-# 2. Anomaly detection (here using a simple threshold-based approach)
-threshold = 2  # Set the anomaly threshold
-anomaly_mask = (data_imputed - data_imputed.mean()).abs() > threshold * data_imputed.std()
-anomaly_indices = anomaly_mask.any(axis=1)
-
-print("Anomaly Indices:")
-print(anomaly_indices)
-print()
-
-# 3. Standardization
-scaler = StandardScaler()
-data_standardized = scaler.fit_transform(data_imputed[['A', 'B', 'C']])
-
-print("Standardized Data:")
-print(data_standardized)
-print()
-
-# 4. Normalization
-min_max_scaler = MinMaxScaler()
-data_normalized = min_max_scaler.fit_transform(data_imputed[['A', 'B', 'C']])
-
-print("Normalized Data:")
-print(data_normalized)
-print()
-
-# 5. Encoding of categorical data
-label_encoder = LabelEncoder()
-data_encoded = label_encoder.fit_transform(data_imputed['Category'])
-
-print("Encoded Category:")
-print(data_encoded)
-
- 2. Gradient descent 
-
- import numpy as np
-import matplotlib.pyplot as plt
-
-def objective(x):
-    return x**2.0
-
-def derivative(x):
-    h = 1e-6
-    return (objective(x + h) - objective(x - h)) / (2*h)
-
-def gradient_descent(objective, derivative, bounds, n_iter, step_size):
-    solutions, scores = [], []
-    solution = bounds[:, 0] + np.random.rand(len(bounds)) * (bounds[:, 1] - bounds[:, 0])
-
-    for _ in range(n_iter):
-        gradient = derivative(solution)
-        solution = solution - step_size * gradient
-        solution_eval = objective(solution)
-        solutions.append(solution)
-        scores.append(solution_eval)
-
-    return solutions, scores
-
-bounds = np.array([[-1.0, 1.0]])
-n_iter = 200
-step_size = 0.01
-solutions, scores = gradient_descent(objective, derivative, bounds, n_iter, step_size)
-
-inputs = np.arange(bounds[0, 0], bounds[0, 1] + 0.1, 0.1)
-results = objective(inputs)
-
-plt.plot(inputs, results)
-plt.plot(solutions, scores, '.-', color='red')
-plt.show()
-
-3. Regression 
-
- #https://www.kaggle.com/code/mtalhazafar/sales-forecasting-by-linear-regression/notebook
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-
-df = pd.read_csv("advertising.csv")
-print(df)
-
-df.info()
-df.describe()
-df.isnull().sum()
-
-X = df[['TV', 'Newspaper', 'Radio']] #Multiple
-# X = df[['TV']] # Linear
-y = df['Sales']
-X.head()
-y.head()
-
-X_train , X_test , y_train , y_test = train_test_split(X , y , test_size=0.2 , random_state=100)
-
-model = LinearRegression()
-model.fit(X_train , y_train )
-y_pred = model.predict(X_test)
-mse = mean_squared_error(y_test, y_pred)
-mae = mean_absolute_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
-
-print("Mean Squared Error:", mse)
-print("Mean Absolute Error:", mae)
-print("R-squared:", r2)
-
-plt.figure(figsize=(8, 6))
-plt.scatter(y_test, y_pred, alpha=0.5)
-plt.xlabel("Actual Values (y_test)")
-plt.ylabel("Predicted Values (y_pred)")
-plt.title("Actual vs. Predicted Values")
-regression_line_x = np.linspace(min(y_test), max(y_test), 100)
-regression_line_y = regression_line_x
-plt.plot(regression_line_x, regression_line_y, color='red', linestyle=':', label="Regression Line")
-plt.legend()
-plt.show()
-
-
- 4. Logistics regression 
-
- #https://www.kaggle.com/code/amolambkar/iris-data-logistic-regression
-import pandas as pd
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-import matplotlib.pyplot as plt
-
-data = pd.read_csv('Iris.csv')
-print(data.head()) #print first 5 rows of dataset
-
-print(data.columns)
-data.info()
-
-
-
-data.drop('Id',axis=1,inplace=True)
-
-
-
-train , test = train_test_split(data,test_size=0.2,random_state=0)
-
-print('shape of training data : ',train.shape)
-print('shape of testing data',test.shape)
-
-train_x = train.drop(columns=['Species'],axis=1)
-train_y = train['Species']
-
-test_x = test.drop(columns=['Species'],axis=1)
-test_y = test['Species']
-
-model = LogisticRegression(solver='liblinear')
-model.fit(train_x,train_y)
-
-predict = model.predict(test_x)
-
-print('Predicted Values on Test Data',predict)
-
-print('\n\nAccuracy Score on test data : \n\n')
-print(accuracy_score(test_y,predict))
-
-5. Decision tree 
-
- import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import LabelEncoder
-%matplotlib inline
-
-data = 'car_evaluation.csv'
-df = pd.read_csv(data, header=None)
-
-# Rename the column
-col_names = ['buying', 'meant', 'doors', 'persons', 'lug_boot', 'safety', 'class']
-
-df.columns = col_names
-df.head()
-df.info()
-
-for col in col_names:
-    print(df[col].value_counts())
-
-df['class'].value_counts()
-
-df.isnull().sum()
-
-X = df.drop(['class'], axis=1)
-
-y = df['class']
-
-from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=0.33,random_state=42)
-
-X_train.shape, X_test.shape
-
-# Encode Categorical
-# !pip install category_encoders
-import category_encoders as ce
-encoder = ce.OrdinalEncoder(cols=['buying', 'meant', 'doors', 'persons', 'lug_boot', 'safety'])
-
-# label_encoder = LabelEncoder()
-# data_encoded = label_encoder.fit_transform(X_train)
-
-
-X_train = encoder.fit_transform(X_train)
-X_test = encoder.transform(X_test)
-
-from sklearn.tree import DecisionTreeClassifier
-
-clf_gini = DecisionTreeClassifier(criterion='gini', max_depth=3, random_state=0)
-clf_gini.fit(X_train, y_train)
-
-y_pred_gini = clf_gini.predict(X_test)
-y_pred_gini[:5]
-
-# Check Accuracy score
-from sklearn.metrics import accuracy_score
-
-print("Model Accuracy score with criterion gini index {0:0.4f}"
-      .format(accuracy_score(y_pred_gini, y_test)))
-
-y_pred_train_gini = clf_gini.predict(X_train)
-y_pred_train_gini
-
-print("Model Accuracy score with criterion gini index {0:0.4f}"
-      .format(accuracy_score(y_pred_train_gini, y_train)))
-
-print("Model Accuracy score with criterion gini index for test dataset {0:0.4f}"
-      .format(accuracy_score(y_pred_gini, y_test)))
-print("Model Accuracy score with criterion gini index for train dataset {0:0.4f}"
-      .format(accuracy_score(y_pred_train_gini, y_train)))
-
-plt.figure(figsize=(10, 8))
-from sklearn import tree
-tree.plot_tree(clf_gini.fit(X_train, y_train))
-
-
-import graphviz
-dot_data = tree.export_graphviz(clf_gini, out_file=None,
-                              feature_names=X_train.columns,
-                              class_names=y_train,
-                              filled=True, rounded=True,
-                              special_characters=True)
-
-graph = graphviz.Source(dot_data)
-
-graph
-
-6. SVM 
-
- #https://www.kaggle.com/code/funxexcel/p1-sklearn-svm-model
-
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn import datasets
-from sklearn.svm import SVC
-from sklearn.model_selection import train_test_split
-
-from sklearn.metrics import classification_report
-
-# Load the Iris dataset
-iris = datasets.load_iris()
-X = iris.data[:, :2]  # Using only the first two features for visualization
-y = iris.target
-
-# Initialize and fit the SVM model (using a linear kernel for simplicity)
-svm = SVC(kernel='linear')
-svm.fit(X, y)
-
-# Split the dataset into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Make predictions on the test set
-y_pred = svm.predict(X_test)
-
-# Calculate precision, recall, and F1-score for each class
-print("Classification Report:")
-print(classification_report(y_test, y_pred, target_names=iris.target_names))
-
-
-# Plotting the decision boundary
-x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-h = .02  # Step size in the mesh
-
-xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
-Z = svm.predict(np.c_[xx.ravel(), yy.ravel()])
-
-Z = Z.reshape(xx.shape)
-plt.figure(1, figsize=(6, 5))
-plt.pcolormesh(xx, yy, Z, cmap=plt.cm.Paired)
-
-# Plot the training points
-plt.scatter(X[:, 0], X[:, 1], c=y, edgecolors='k', cmap=plt.cm.Paired)
-plt.xlabel('Sepal length')
-plt.ylabel('Sepal width')
-
-plt.xlim(xx.min(), xx.max())
-plt.ylim(yy.min(), yy.max())
-plt.xticks(())
-plt.yticks(())
-
-plt.show()
-
-
-7. Ensemble 
-
- import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import StackingRegressor, RandomForestRegressor
-from sklearn.linear_model import Lasso, Ridge
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.svm import SVR
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.metrics import mean_squared_error
-import xgboost as xgb
-import matplotlib.pyplot as plt
-
-# Load the dataset
-df = pd.read_csv('advertising.csv')
-
-# Fill missing values with mean
-df.fillna(df.mean(), inplace=True)
-
-# Split into features and target variable
-X = df.drop(columns=['Sales'])
-y = df['Sales']
-
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Stacking
-base_models = [('lasso', Lasso()), ('ridge', Ridge()), ('knn', KNeighborsRegressor()), ('svr', SVR()), ('dt', DecisionTreeRegressor())]
-meta_model = Ridge()
-stacking_regressor = StackingRegressor(estimators=base_models, final_estimator=meta_model)
-stacking_regressor.fit(X_train, y_train)
-y_train_pred_stack = stacking_regressor.predict(X_train)
-y_test_pred_stack = stacking_regressor.predict(X_test)
-
-# Bagging - Random Forest
-random_forest_regressor = RandomForestRegressor(n_estimators=10, random_state=42)
-random_forest_regressor.fit(X_train, y_train)
-y_train_pred_rf = random_forest_regressor.predict(X_train)
-y_test_pred_rf = random_forest_regressor.predict(X_test)
-
-# Boosting - XGBoost
-xgb_regressor = xgb.XGBRegressor(n_estimators=10, random_state=42)
-xgb_regressor.fit(X_train, y_train)
-y_train_pred_xgb = xgb_regressor.predict(X_train)
-y_test_pred_xgb = xgb_regressor.predict(X_test)
-
-# Evaluation Metrics - RMSE for train and test sets
-rmse_stacking_train = np.sqrt(mean_squared_error(y_train, y_train_pred_stack))
-rmse_stacking_test = np.sqrt(mean_squared_error(y_test, y_test_pred_stack))
-
-rmse_rf_train = np.sqrt(mean_squared_error(y_train, y_train_pred_rf))
-rmse_rf_test = np.sqrt(mean_squared_error(y_test, y_test_pred_rf))
-
-rmse_boosting_train = np.sqrt(mean_squared_error(y_train, y_train_pred_xgb))
-rmse_boosting_test = np.sqrt(mean_squared_error(y_test, y_test_pred_xgb))
-
-# Create bar plots to compare RMSE of different ensemble methods on both training and test sets
-labels = ['Stacking', 'Random Forest', 'XGBoost']
-rmse_train = [rmse_stacking_train, rmse_rf_train, rmse_boosting_train]
-rmse_test = [rmse_stacking_test, rmse_rf_test, rmse_boosting_test]
-
-x = np.arange(len(labels))
-width = 0.35
-
-fig, ax = plt.subplots()
-rects1 = ax.bar(x - width/2, rmse_train, width, label='Train')
-rects2 = ax.bar(x + width/2, rmse_test, width, label='Test')
-
-ax.set_ylabel('RMSE')
-ax.set_title('RMSE by Ensemble Methods')
-ax.set_xticks(x)
-ax.set_xticklabels(labels)
-ax.legend()
-
-plt.show()
-
- 8. PCA
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.datasets import load_breast_cancer
-from sklearn.decomposition import PCA
-
-# Load the breast cancer dataset
-cancer = load_breast_cancer(as_frame=True)
-df = cancer.frame
-
-print(df)
-
-# Input features
-X = df[cancer.feature_names]
-
-# Standardization
-X_mean = X.mean()
-X_std = X.std()
-Z = (X - X_mean) / X_std
-
-# Specify the number of principal components
-n_components = 2
-
-# Perform PCA
-pca = PCA(n_components=n_components)
-x_pca = pca.fit_transform(Z)
-
-# Create a new dataframe for the principal components
-df_pca = pd.DataFrame(x_pca, columns=['PC{}'.format(i + 1) for i in range(n_components)])
-
-# Scatter plot of the first two principal components
-plt.figure(figsize=(8, 6))
-plt.scatter(x_pca[:, 0], x_pca[:, 1], c=cancer.target, cmap='plasma')
-plt.xlabel('First Principal Component')
-plt.ylabel('Second Principal Component')
-plt.show()
 
 
 </body>
